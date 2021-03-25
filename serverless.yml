@@ -1,0 +1,26 @@
+service: aleatica-poc-develop
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: staging
+  region: us-west-2
+  apiGateway:
+    shouldStartNameWithService: true
+
+functions:
+  aleatica-poc:
+    handler: handler.index
+    events:
+      - http:
+          path: health
+          method: get
+          cors:
+            origin: '*'
+      - http:
+          path: values
+          method: get
+          cors:
+            origin: '*'
